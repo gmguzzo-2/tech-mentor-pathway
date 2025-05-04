@@ -2,23 +2,31 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { translations } from "@/lib/translations";
 
+// Type for any nested object with string values or arrays
+type NestedValue = string | NestedObject | Array<any>;
+
 // Type for any nested object with string values
 type NestedObject = {
-  [key: string]: string | NestedObject;
+  [key: string]: NestedValue;
 };
 
 // Type guard to check if a property is a nested object
-function isNestedObject(obj: string | NestedObject): obj is NestedObject {
-  return typeof obj !== 'string';
+function isNestedObject(obj: NestedValue): obj is NestedObject {
+  return typeof obj === 'object' && obj !== null && !Array.isArray(obj);
+}
+
+// Type guard to check if a property is a string
+function isString(obj: NestedValue): obj is string {
+  return typeof obj === 'string';
 }
 
 // Function to get a nested property by path
-function getNestedProperty(obj: NestedObject, path: string): string | NestedObject {
+function getNestedProperty(obj: NestedObject, path: string): NestedValue {
   const keys = path.split('.');
-  let current: any = obj;
+  let current: NestedValue = obj;
   
   for (const key of keys) {
-    if (current[key] === undefined) {
+    if (!isNestedObject(current) || current[key] === undefined) {
       console.warn(`Translation key not found: ${path}`);
       return path;
     }
@@ -32,11 +40,11 @@ export function useTranslations() {
   const { language } = useLanguage();
   
   const t = (key: string): string => {
-    const langTranslations = translations[language] as NestedObject;
+    const langTranslations = translations[language] as unknown as NestedObject;
     const value = getNestedProperty(langTranslations, key);
     
-    if (isNestedObject(value)) {
-      console.warn(`Translation key resolves to an object not a string: ${key}`);
+    if (!isString(value)) {
+      console.warn(`Translation key resolves to a non-string value: ${key}`);
       return key;
     }
     
