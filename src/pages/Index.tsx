@@ -9,8 +9,11 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, BookOpen, BookText, UserRound, Target, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { courses, mentors, courseRecommendations } from "@/lib/data";
+import { useTranslations } from "@/hooks/useTranslations";
 
 const Index = () => {
+  const { t } = useTranslations();
+  
   // Get featured courses (first 3)
   const featuredCourses = courses.slice(0, 3);
   
@@ -33,10 +36,10 @@ const Index = () => {
           <div className="container mx-auto px-4">
             <div className="text-center max-w-3xl mx-auto mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                How <span className="gradient-text">TechPathways</span> Works
+                {t('home.howItWorks.title')} <span className="gradient-text">TechPathways</span>
               </h2>
               <p className="text-lg text-gray-600">
-                Our personalized approach to tech education helps you build the right skills with guidance from industry experts.
+                {t('home.howItWorks.subtitle')}
               </p>
             </div>
             
@@ -46,9 +49,9 @@ const Index = () => {
                 <div className="mb-6 w-16 h-16 rounded-full bg-techblue/10 flex items-center justify-center">
                   <Target className="h-8 w-8 text-techblue" />
                 </div>
-                <h3 className="text-xl font-bold mb-3">Assess Your Skills</h3>
+                <h3 className="text-xl font-bold mb-3">{t('home.howItWorks.steps.0.title')}</h3>
                 <p className="text-gray-600">
-                  Take a comprehensive skill assessment to identify your strengths and areas for improvement.
+                  {t('home.howItWorks.steps.0.description')}
                 </p>
               </div>
               
@@ -57,9 +60,9 @@ const Index = () => {
                 <div className="mb-6 w-16 h-16 rounded-full bg-techpurple/10 flex items-center justify-center">
                   <BookOpen className="h-8 w-8 text-techpurple" />
                 </div>
-                <h3 className="text-xl font-bold mb-3">Follow Your Path</h3>
+                <h3 className="text-xl font-bold mb-3">{t('home.howItWorks.steps.1.title')}</h3>
                 <p className="text-gray-600">
-                  Get personalized course recommendations and learning resources tailored to your goals.
+                  {t('home.howItWorks.steps.1.description')}
                 </p>
               </div>
               
@@ -68,9 +71,9 @@ const Index = () => {
                 <div className="mb-6 w-16 h-16 rounded-full bg-techteal/10 flex items-center justify-center">
                   <UserRound className="h-8 w-8 text-techteal" />
                 </div>
-                <h3 className="text-xl font-bold mb-3">Connect with Mentors</h3>
+                <h3 className="text-xl font-bold mb-3">{t('home.howItWorks.steps.2.title')}</h3>
                 <p className="text-gray-600">
-                  Learn from industry experts who provide guidance, feedback, and career advice.
+                  {t('home.howItWorks.steps.2.description')}
                 </p>
               </div>
             </div>
@@ -78,7 +81,7 @@ const Index = () => {
             <div className="flex justify-center mt-12">
               <Button size="lg" className="bg-techblue hover:bg-techblue/90">
                 <Link to="/profile" className="flex items-center">
-                  Get Started <ArrowRight size={16} className="ml-2" />
+                  {t('home.howItWorks.getStarted')} <ArrowRight size={16} className="ml-2" />
                 </Link>
               </Button>
             </div>
@@ -89,9 +92,9 @@ const Index = () => {
         <section className="py-16 md:py-20 bg-white">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-              <h2 className="text-3xl font-bold mb-4 md:mb-0">Featured Courses</h2>
+              <h2 className="text-3xl font-bold mb-4 md:mb-0">{t('home.featuredCourses.title')}</h2>
               <Link to="/courses" className="text-techblue hover:text-techblue/80 font-medium flex items-center">
-                View all courses <ArrowRight size={16} className="ml-1" />
+                {t('home.featuredCourses.viewAll')} <ArrowRight size={16} className="ml-1" />
               </Link>
             </div>
             
@@ -104,10 +107,10 @@ const Index = () => {
           <div className="container mx-auto px-4">
             <div className="text-center max-w-3xl mx-auto mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Learning Paths By <span className="gradient-text">Category</span>
+                {t('home.learningPaths.title')} <span className="gradient-text">{t('home.learningPaths.byCategory')}</span>
               </h2>
               <p className="text-lg text-gray-600">
-                Explore curated learning paths designed by industry experts
+                {t('home.learningPaths.subtitle')}
               </p>
             </div>
             
@@ -116,18 +119,18 @@ const Index = () => {
                 <Card key={index} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                   <div className={`h-2 ${getColorClass(category)}`}></div>
                   <div className="p-6">
-                    <h3 className="text-xl font-bold mb-4">{category}</h3>
+                    <h3 className="text-xl font-bold mb-4">{t(`home.categories.${category.toLowerCase().replace(' ', '')}`)}</h3>
                     <ul className="space-y-3">
                       {recommendations.map((course, idx) => (
                         <li key={idx} className="flex items-start">
                           <CheckCircle2 className="h-5 w-5 text-green-500 mr-2 shrink-0 mt-0.5" />
-                          <span className="text-gray-700">{course}</span>
+                          <span className="text-gray-700">{t(`home.recommendations.${category.toLowerCase().replace(' ', '')}.${idx}`)}</span>
                         </li>
                       ))}
                     </ul>
                     <Button className="w-full mt-6 bg-gray-100 text-gray-800 hover:bg-gray-200">
                       <Link to={`/courses?category=${category.toLowerCase().replace(' ', '-')}`} className="flex items-center justify-center">
-                        Explore Path <ArrowRight size={16} className="ml-2" />
+                        {t('home.explorePath')} <ArrowRight size={16} className="ml-2" />
                       </Link>
                     </Button>
                   </div>
@@ -141,9 +144,9 @@ const Index = () => {
         <section className="py-16 md:py-20 bg-white">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-              <h2 className="text-3xl font-bold mb-4 md:mb-0">Meet Our Mentors</h2>
+              <h2 className="text-3xl font-bold mb-4 md:mb-0">{t('home.mentors.title')}</h2>
               <Link to="/mentors" className="text-techblue hover:text-techblue/80 font-medium flex items-center">
-                View all mentors <ArrowRight size={16} className="ml-1" />
+                {t('home.mentors.viewAll')} <ArrowRight size={16} className="ml-1" />
               </Link>
             </div>
             
@@ -154,33 +157,33 @@ const Index = () => {
             </div>
             
             <div className="text-center mt-12">
-              <p className="text-xl font-medium mb-4">Ready to accelerate your tech career?</p>
+              <p className="text-xl font-medium mb-4">{t('home.mentors.ready')}</p>
               <Button size="lg" className="bg-techpurple hover:bg-techpurple/90">
                 <Link to="/mentors" className="flex items-center">
-                  Find Your Mentor <ArrowRight size={16} className="ml-2" />
+                  {t('home.mentors.findYours')} <ArrowRight size={16} className="ml-2" />
                 </Link>
               </Button>
             </div>
           </div>
         </section>
         
-        {/* Testimonials section - simplified for now */}
+        {/* Testimonials section */}
         <section className="py-16 md:py-24 bg-gray-50">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-12">
-              What Our <span className="gradient-text">Users Say</span>
+              {t('home.testimonials.title')} <span className="gradient-text">{t('home.testimonials.highlight')}</span>
             </h2>
             
             {/* Placeholder for testimonials */}
             <div className="max-w-lg mx-auto bg-white p-8 rounded-xl shadow-md">
               <p className="text-lg italic text-gray-600 mb-6">
-                "TechPathways completely changed my learning journey. The personalized recommendations and mentor guidance helped me land my dream job in web development."
+                {t('home.testimonials.quote')}
               </p>
               <div className="flex items-center justify-center">
                 <img src="/placeholder.svg" alt="Student" className="w-12 h-12 rounded-full mr-4" />
                 <div className="text-left">
                   <p className="font-medium">Maria Silva</p>
-                  <p className="text-sm text-gray-500">Frontend Developer at Nubank</p>
+                  <p className="text-sm text-gray-500">{t('home.testimonials.role')}</p>
                 </div>
               </div>
             </div>
@@ -191,17 +194,17 @@ const Index = () => {
         <section className="py-16 md:py-20 bg-gradient-to-r from-techblue to-techpurple text-white">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Start Your Tech Learning Journey Today
+              {t('home.cta.title')}
             </h2>
             <p className="text-xl opacity-90 mb-8 max-w-2xl mx-auto">
-              Join thousands of students accelerating their careers with personalized learning paths and expert mentorship.
+              {t('home.cta.subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="bg-white text-techblue hover:bg-gray-100">
-                <Link to="/profile">Create Your Profile</Link>
+                <Link to="/profile">{t('home.cta.createProfile')}</Link>
               </Button>
               <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
-                <Link to="/courses">Explore Courses</Link>
+                <Link to="/courses">{t('home.cta.exploreCourses')}</Link>
               </Button>
             </div>
           </div>
