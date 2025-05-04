@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Course } from "@/lib/data";
+import { useTranslations } from "@/hooks/useTranslations";
 
 interface CourseCardProps {
   course: Course;
@@ -13,6 +14,7 @@ interface CourseCardProps {
 
 const CourseCard = ({ course, featured = false }: CourseCardProps) => {
   const { id, title, provider, description, imageUrl, level, category, duration, rating, reviews, price, tags } = course;
+  const { t } = useTranslations();
   
   // Format price to show as currency
   const formattedPrice = new Intl.NumberFormat('pt-BR', { 
@@ -30,7 +32,7 @@ const CourseCard = ({ course, featured = false }: CourseCardProps) => {
         />
         {featured && (
           <div className="absolute top-4 right-4 bg-techpurple text-white text-xs font-bold px-3 py-1 rounded-full">
-            Featured
+            {t('courses.featured')}
           </div>
         )}
         <div className="absolute top-4 left-4">
@@ -89,7 +91,7 @@ const CourseCard = ({ course, featured = false }: CourseCardProps) => {
       <CardFooter className="flex justify-between items-center pt-2 border-t">
         <span className="font-bold text-lg">{formattedPrice}</span>
         <Button className="bg-techblue hover:bg-techblue/90">
-          <Link to={`/courses/${id}`}>View Course</Link>
+          <Link to={`/courses/${id}`}>{t('courses.viewCourse')}</Link>
         </Button>
       </CardFooter>
     </Card>

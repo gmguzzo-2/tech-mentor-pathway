@@ -45,7 +45,7 @@ const Features = () => {
       color: 'bg-green-100 text-green-700'
     },
     {
-      icon: UserRound,
+      icon: Users,
       title: t('home.features.items.4.title'),
       description: t('home.features.items.4.description'),
       link: '/mentors',

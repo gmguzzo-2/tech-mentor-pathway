@@ -2,13 +2,13 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { translations } from "@/lib/translations";
 
-// Type for any nested object with string values or arrays
+// Type for any nested object with string values, arrays or nested objects
 type NestedValue = string | NestedObject | Array<any>;
 
 // Type for any nested object with string values
-type NestedObject = {
+interface NestedObject {
   [key: string]: NestedValue;
-};
+}
 
 // Type guard to check if a property is a nested object
 function isNestedObject(obj: NestedValue): obj is NestedObject {
@@ -40,6 +40,7 @@ export function useTranslations() {
   const { language } = useLanguage();
   
   const t = (key: string): string => {
+    // Cast to unknown first, then to NestedObject to avoid TypeScript errors
     const langTranslations = translations[language] as unknown as NestedObject;
     const value = getNestedProperty(langTranslations, key);
     

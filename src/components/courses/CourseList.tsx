@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/select";
 import CourseCard from "./CourseCard";
 import { Course } from "@/lib/data";
+import { useTranslations } from "@/hooks/useTranslations";
 
 interface CourseListProps {
   courses: Course[];
@@ -26,7 +27,8 @@ interface CourseListProps {
   showFilters?: boolean;
 }
 
-const CourseList = ({ courses, title = "Courses", showFilters = true }: CourseListProps) => {
+const CourseList = ({ courses, title, showFilters = true }: CourseListProps) => {
+  const { t } = useTranslations();
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('popularity');
   
@@ -48,7 +50,7 @@ const CourseList = ({ courses, title = "Courses", showFilters = true }: CourseLi
   return (
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-        <h2 className="text-2xl font-bold">{title} <span className="text-gray-500 text-lg">({courses.length})</span></h2>
+        <h2 className="text-2xl font-bold">{title || t('courses.title')} <span className="text-gray-500 text-lg">({courses.length})</span></h2>
         
         {showFilters && (
           <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
@@ -56,7 +58,7 @@ const CourseList = ({ courses, title = "Courses", showFilters = true }: CourseLi
               <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
                 type="search"
-                placeholder="Search courses..."
+                placeholder={t('courses.search')}
                 className="pl-9"
                 value={searchTerm}
                 onChange={handleSearchChange}
@@ -67,21 +69,21 @@ const CourseList = ({ courses, title = "Courses", showFilters = true }: CourseLi
               <SelectTrigger className="w-full sm:w-48">
                 <div className="flex items-center">
                   <SortAsc className="mr-2 h-4 w-4" />
-                  <SelectValue placeholder="Sort by" />
+                  <SelectValue placeholder={t('courses.sortBy')} />
                 </div>
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="popularity">Most Popular</SelectItem>
-                <SelectItem value="newest">Newest</SelectItem>
-                <SelectItem value="rating-high">Highest Rated</SelectItem>
-                <SelectItem value="price-low">Price: Low to High</SelectItem>
-                <SelectItem value="price-high">Price: High to Low</SelectItem>
+                <SelectItem value="popularity">{t('courses.popular')}</SelectItem>
+                <SelectItem value="newest">{t('courses.newest')}</SelectItem>
+                <SelectItem value="rating-high">{t('courses.highestRated')}</SelectItem>
+                <SelectItem value="price-low">{t('courses.priceLowHigh')}</SelectItem>
+                <SelectItem value="price-high">{t('courses.priceHighLow')}</SelectItem>
               </SelectContent>
             </Select>
             
             <Button variant="outline" className="flex items-center">
               <Filter className="mr-2 h-4 w-4" />
-              Filters
+              {t('courses.filters')}
               <ChevronDown className="ml-2 h-4 w-4" />
             </Button>
           </div>
@@ -110,7 +112,7 @@ const CourseList = ({ courses, title = "Courses", showFilters = true }: CourseLi
           </Button>
           <Button variant="outline" size="sm" className="rounded-full bg-techpurple/10 text-techpurple border-techpurple">
             <Sliders className="mr-1 h-3 w-3" />
-            All Filters
+            {t('courses.allFilters')}
           </Button>
         </div>
       )}
@@ -128,8 +130,8 @@ const CourseList = ({ courses, title = "Courses", showFilters = true }: CourseLi
       ) : (
         <div className="text-center py-12">
           <BookOpen size={48} className="mx-auto text-gray-300 mb-4" />
-          <h3 className="text-xl font-medium text-gray-700">No courses found</h3>
-          <p className="text-gray-500 mt-2">Try adjusting your search or filters</p>
+          <h3 className="text-xl font-medium text-gray-700">{t('courses.noCourses')}</h3>
+          <p className="text-gray-500 mt-2">{t('courses.adjustSearch')}</p>
         </div>
       )}
     </div>
