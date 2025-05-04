@@ -4,9 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Search, User, BookOpen, UsersRound, Bell } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import { useTranslations } from "@/hooks/useTranslations";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { t } = useTranslations();
 
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50">
@@ -26,7 +29,7 @@ const Navbar = () => {
               <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input 
                 type="search" 
-                placeholder="Search courses, mentors, or topics..." 
+                placeholder={t('nav.search')} 
                 className="w-full pl-8"
               />
             </div>
@@ -34,16 +37,17 @@ const Navbar = () => {
 
           {/* Desktop navigation */}
           <div className="hidden md:flex items-center space-x-1">
-            <Link to="/courses" className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-techblue">Courses</Link>
-            <Link to="/mentors" className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-techblue">Mentors</Link>
-            <Link to="/community" className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-techblue">Community</Link>
+            <Link to="/courses" className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-techblue">{t('nav.courses')}</Link>
+            <Link to="/mentors" className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-techblue">{t('nav.mentors')}</Link>
+            <Link to="/community" className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-techblue">{t('nav.community')}</Link>
             <div className="flex items-center space-x-3 ml-4">
+              <LanguageSwitcher />
               <Button variant="ghost" size="icon" className="relative">
                 <Bell size={20} />
                 <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
               </Button>
-              <Button variant="outline">Sign In</Button>
-              <Button>Sign Up</Button>
+              <Button variant="outline">{t('nav.signIn')}</Button>
+              <Button>{t('nav.signUp')}</Button>
             </div>
           </div>
 
@@ -52,6 +56,7 @@ const Navbar = () => {
             <Button variant="ghost" size="icon">
               <Search size={20} />
             </Button>
+            <LanguageSwitcher />
             <Button variant="ghost" size="icon" className="relative">
               <Bell size={20} />
               <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
@@ -70,17 +75,17 @@ const Navbar = () => {
         {isMenuOpen && (
           <div className="md:hidden pt-4 pb-3 border-t mt-3 space-y-3">
             <Link to="/courses" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-techblue hover:bg-gray-50 rounded-md">
-              Courses
+              {t('nav.courses')}
             </Link>
             <Link to="/mentors" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-techblue hover:bg-gray-50 rounded-md">
-              Mentors
+              {t('nav.mentors')}
             </Link>
             <Link to="/community" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-techblue hover:bg-gray-50 rounded-md">
-              Community
+              {t('nav.community')}
             </Link>
             <div className="pt-4 flex flex-col space-y-2">
-              <Button variant="outline" className="w-full justify-center">Sign In</Button>
-              <Button className="w-full justify-center">Sign Up</Button>
+              <Button variant="outline" className="w-full justify-center">{t('nav.signIn')}</Button>
+              <Button className="w-full justify-center">{t('nav.signUp')}</Button>
             </div>
           </div>
         )}

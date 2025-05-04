@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Star, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Mentor } from "@/lib/data";
+import { useTranslations } from "@/hooks/useTranslations";
 
 interface MentorCardProps {
   mentor: Mentor;
@@ -12,6 +13,7 @@ interface MentorCardProps {
 
 const MentorCard = ({ mentor }: MentorCardProps) => {
   const { id, name, role, company, imageUrl, specialties, yearsOfExperience, rating, reviews, availability, hourlyRate, bio } = mentor;
+  const { t } = useTranslations();
   
   // Format hourly rate to show as currency
   const formattedHourlyRate = new Intl.NumberFormat('pt-BR', { 
@@ -37,7 +39,7 @@ const MentorCard = ({ mentor }: MentorCardProps) => {
             </div>
             <div className="flex items-center text-sm">
               <Star size={16} className="mr-1 text-yellow-500" />
-              <span>{rating} ({reviews} reviews) • {yearsOfExperience} years experience</span>
+              <span>{rating} ({reviews} {t('mentors.reviews')}) • {yearsOfExperience} {t('mentors.yearsExp')}</span>
             </div>
           </div>
         </div>
@@ -48,7 +50,7 @@ const MentorCard = ({ mentor }: MentorCardProps) => {
         
         {specialties && specialties.length > 0 && (
           <div className="space-y-2">
-            <div className="text-sm font-medium">Specialties:</div>
+            <div className="text-sm font-medium">{t('mentors.specialties')}</div>
             <div className="flex flex-wrap gap-1">
               {specialties.map((specialty, index) => (
                 <Badge key={index} variant="secondary" className="bg-gray-100 text-gray-700">
@@ -64,13 +66,13 @@ const MentorCard = ({ mentor }: MentorCardProps) => {
             <Calendar size={16} className="mr-1 text-gray-500" />
             <span>{availability}</span>
           </div>
-          <div className="font-semibold">{formattedHourlyRate}/hour</div>
+          <div className="font-semibold">{formattedHourlyRate}{t('mentors.hourly')}</div>
         </div>
       </CardContent>
       
       <CardFooter className="flex justify-between pt-2 border-t">
-        <Button variant="outline">View Profile</Button>
-        <Button className="bg-techpurple hover:bg-techpurple/90">Schedule Session</Button>
+        <Button variant="outline">{t('mentors.viewProfile')}</Button>
+        <Button className="bg-techpurple hover:bg-techpurple/90">{t('mentors.scheduleSession')}</Button>
       </CardFooter>
     </Card>
   );
