@@ -19,9 +19,11 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { mentors } from "@/lib/data";
+import { useTranslations } from "@/hooks/useTranslations";
 
 const Mentors = () => {
   const [showFilters, setShowFilters] = useState(false);
+  const { t } = useTranslations();
   
   return (
     <div className="min-h-screen flex flex-col">
@@ -31,9 +33,9 @@ const Mentors = () => {
         <div className="container mx-auto px-4">
           {/* Hero section */}
           <div className="bg-white p-6 rounded-lg shadow-sm mb-8">
-            <h1 className="text-3xl font-bold mb-3">Find Your Mentor</h1>
+            <h1 className="text-3xl font-bold mb-3">{t('mentors.title')}</h1>
             <p className="text-gray-600 mb-4 max-w-3xl">
-              Connect with industry experts who can provide personalized guidance, code reviews, and career advice to accelerate your tech journey.
+              {t('mentors.subtitle')}
             </p>
             <Button 
               variant="outline" 
@@ -42,7 +44,7 @@ const Mentors = () => {
               onClick={() => setShowFilters(!showFilters)}
             >
               <Filter className="mr-2 h-4 w-4" />
-              {showFilters ? "Hide Filters" : "Show Filters"}
+              {showFilters ? t('mentors.hideFilters') : t('mentors.showFilters')}
             </Button>
           </div>
           
@@ -51,7 +53,7 @@ const Mentors = () => {
             {showFilters && (
               <div className="w-full lg:w-1/4 bg-white p-6 rounded-lg shadow-sm h-fit">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="font-bold text-lg">Filters</h3>
+                  <h3 className="font-bold text-lg">{t('mentors.filters')}</h3>
                   <Button variant="ghost" size="sm" className="h-8 w-8 p-0" onClick={() => setShowFilters(false)}>
                     <X className="h-4 w-4" />
                   </Button>
@@ -59,13 +61,13 @@ const Mentors = () => {
                 
                 <div className="mb-4">
                   <label htmlFor="search-mentors" className="block text-sm font-medium mb-1 text-gray-700">
-                    Search mentors
+                    {t('mentors.searchMentors')}
                   </label>
                   <div className="relative">
                     <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
                     <Input
                       id="search-mentors"
-                      placeholder="Name or specialty..."
+                      placeholder={t('mentors.searchPlaceholder')}
                       className="pl-9"
                     />
                   </div>
@@ -74,7 +76,7 @@ const Mentors = () => {
                 <Accordion type="single" collapsible className="w-full" defaultValue="specialty">
                   {/* Specialty filter */}
                   <AccordionItem value="specialty">
-                    <AccordionTrigger>Specialty</AccordionTrigger>
+                    <AccordionTrigger>{t('mentors.specialty')}</AccordionTrigger>
                     <AccordionContent>
                       <div className="space-y-2">
                         <div className="flex items-center">
@@ -84,7 +86,7 @@ const Mentors = () => {
                             className="h-4 w-4 border-gray-300 rounded text-techblue focus:ring-techblue" 
                           />
                           <label htmlFor="spec-webdev" className="ml-2 text-sm text-gray-700">
-                            Web Development
+                            {t('mentors.webDevelopment')}
                           </label>
                         </div>
                         <div className="flex items-center">
@@ -94,7 +96,7 @@ const Mentors = () => {
                             className="h-4 w-4 border-gray-300 rounded text-techblue focus:ring-techblue" 
                           />
                           <label htmlFor="spec-datascience" className="ml-2 text-sm text-gray-700">
-                            Data Science
+                            {t('mentors.dataScience')}
                           </label>
                         </div>
                         <div className="flex items-center">
@@ -114,7 +116,7 @@ const Mentors = () => {
                             className="h-4 w-4 border-gray-300 rounded text-techblue focus:ring-techblue" 
                           />
                           <label htmlFor="spec-design" className="ml-2 text-sm text-gray-700">
-                            UI/UX Design
+                            {t('mentors.uiuxDesign')}
                           </label>
                         </div>
                       </div>
@@ -123,7 +125,7 @@ const Mentors = () => {
                   
                   {/* Experience filter */}
                   <AccordionItem value="experience">
-                    <AccordionTrigger>Experience</AccordionTrigger>
+                    <AccordionTrigger>{t('mentors.experience')}</AccordionTrigger>
                     <AccordionContent>
                       <div className="space-y-2">
                         <div className="flex items-center">
@@ -133,7 +135,7 @@ const Mentors = () => {
                             className="h-4 w-4 border-gray-300 rounded text-techblue focus:ring-techblue" 
                           />
                           <label htmlFor="exp-5plus" className="ml-2 text-sm text-gray-700">
-                            5+ years
+                            {t('mentors.5years')}
                           </label>
                         </div>
                         <div className="flex items-center">
@@ -143,7 +145,7 @@ const Mentors = () => {
                             className="h-4 w-4 border-gray-300 rounded text-techblue focus:ring-techblue" 
                           />
                           <label htmlFor="exp-10plus" className="ml-2 text-sm text-gray-700">
-                            10+ years
+                            {t('mentors.10years')}
                           </label>
                         </div>
                         <div className="flex items-center">
@@ -153,7 +155,7 @@ const Mentors = () => {
                             className="h-4 w-4 border-gray-300 rounded text-techblue focus:ring-techblue" 
                           />
                           <label htmlFor="exp-15plus" className="ml-2 text-sm text-gray-700">
-                            15+ years
+                            {t('mentors.15years')}
                           </label>
                         </div>
                       </div>
@@ -162,7 +164,7 @@ const Mentors = () => {
                   
                   {/* Availability filter */}
                   <AccordionItem value="availability">
-                    <AccordionTrigger>Availability</AccordionTrigger>
+                    <AccordionTrigger>{t('mentors.availability')}</AccordionTrigger>
                     <AccordionContent>
                       <div className="space-y-2">
                         <div className="flex items-center">
@@ -172,7 +174,7 @@ const Mentors = () => {
                             className="h-4 w-4 border-gray-300 rounded text-techblue focus:ring-techblue" 
                           />
                           <label htmlFor="avail-weekends" className="ml-2 text-sm text-gray-700">
-                            Weekends
+                            {t('mentors.weekends')}
                           </label>
                         </div>
                         <div className="flex items-center">
@@ -182,7 +184,7 @@ const Mentors = () => {
                             className="h-4 w-4 border-gray-300 rounded text-techblue focus:ring-techblue" 
                           />
                           <label htmlFor="avail-evenings" className="ml-2 text-sm text-gray-700">
-                            Weekday Evenings
+                            {t('mentors.weekdayEvenings')}
                           </label>
                         </div>
                         <div className="flex items-center">
@@ -192,7 +194,7 @@ const Mentors = () => {
                             className="h-4 w-4 border-gray-300 rounded text-techblue focus:ring-techblue" 
                           />
                           <label htmlFor="avail-flexible" className="ml-2 text-sm text-gray-700">
-                            Flexible
+                            {t('mentors.flexible')}
                           </label>
                         </div>
                       </div>
@@ -201,7 +203,7 @@ const Mentors = () => {
                   
                   {/* Price range filter */}
                   <AccordionItem value="price">
-                    <AccordionTrigger>Hourly Rate</AccordionTrigger>
+                    <AccordionTrigger>{t('mentors.hourlyRate')}</AccordionTrigger>
                     <AccordionContent>
                       <div className="space-y-2">
                         <div className="flex items-center">
@@ -211,7 +213,7 @@ const Mentors = () => {
                             className="h-4 w-4 border-gray-300 rounded text-techblue focus:ring-techblue" 
                           />
                           <label htmlFor="rate-under100" className="ml-2 text-sm text-gray-700">
-                            Under R$100/hour
+                            {t('mentors.under100')}
                           </label>
                         </div>
                         <div className="flex items-center">
@@ -221,7 +223,7 @@ const Mentors = () => {
                             className="h-4 w-4 border-gray-300 rounded text-techblue focus:ring-techblue" 
                           />
                           <label htmlFor="rate-100to150" className="ml-2 text-sm text-gray-700">
-                            R$100 - R$150/hour
+                            {t('mentors.range100to150')}
                           </label>
                         </div>
                         <div className="flex items-center">
@@ -231,7 +233,7 @@ const Mentors = () => {
                             className="h-4 w-4 border-gray-300 rounded text-techblue focus:ring-techblue" 
                           />
                           <label htmlFor="rate-over150" className="ml-2 text-sm text-gray-700">
-                            Over R$150/hour
+                            {t('mentors.over150')}
                           </label>
                         </div>
                       </div>
@@ -241,10 +243,10 @@ const Mentors = () => {
                 
                 <div className="mt-6 space-y-3">
                   <Button className="w-full bg-techblue hover:bg-techblue/90">
-                    Apply Filters
+                    {t('mentors.applyFilters')}
                   </Button>
                   <Button variant="outline" className="w-full">
-                    Reset
+                    {t('mentors.reset')}
                   </Button>
                 </div>
               </div>
@@ -254,24 +256,24 @@ const Mentors = () => {
             <div className={`w-full ${showFilters ? 'lg:w-3/4' : 'w-full'}`}>
               <div className="bg-white p-6 rounded-lg shadow-sm">
                 <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-8">
-                  <h2 className="text-2xl font-bold mb-4 md:mb-0">Available Mentors <span className="text-gray-500 text-lg">({mentors.length})</span></h2>
+                  <h2 className="text-2xl font-bold mb-4 md:mb-0">{t('mentors.availableMentors')} <span className="text-gray-500 text-lg">({mentors.length})</span></h2>
                   <div className="flex gap-3 w-full md:w-auto">
                     <div className="relative flex-grow md:w-64">
                       <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
                       <Input
-                        placeholder="Search mentors..."
+                        placeholder={t('mentors.search')}
                         className="pl-9"
                       />
                     </div>
                     
                     <Button variant="outline" className="flex items-center whitespace-nowrap">
                       <Calendar className="mr-2 h-4 w-4" />
-                      Availability
+                      {t('mentors.availability')}
                     </Button>
                     
                     <Button variant="outline" className="flex items-center whitespace-nowrap md:hidden" onClick={() => setShowFilters(!showFilters)}>
                       <Sliders className="mr-2 h-4 w-4" />
-                      Filters
+                      {t('mentors.filters')}
                     </Button>
                   </div>
                 </div>
@@ -279,16 +281,16 @@ const Mentors = () => {
                 {/* Filter chips */}
                 <div className="flex flex-wrap gap-2 mb-6">
                   <Button variant="outline" size="sm" className="rounded-full">
-                    Web Development
+                    {t('mentors.webDevelopment')}
                   </Button>
                   <Button variant="outline" size="sm" className="rounded-full bg-techpurple/10 text-techpurple border-techpurple">
-                    Weekends
+                    {t('mentors.weekends')}
                   </Button>
                   <Button variant="outline" size="sm" className="rounded-full">
-                    5+ years experience
+                    {t('mentors.5yearsExp')}
                   </Button>
                   <Button variant="outline" size="sm" className="rounded-full">
-                    Under R$150/hour
+                    {t('mentors.underPrice')}
                   </Button>
                 </div>
                 
