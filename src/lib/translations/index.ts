@@ -6,6 +6,7 @@ import { mentorsTranslations } from "./mentors";
 import { profileTranslations } from "./profile";
 import { footerTranslations } from "./footer";
 import { notFoundTranslations } from "./notFound";
+import { authTranslations } from "./auth";
 
 export const translations = {
   en: {
@@ -16,6 +17,7 @@ export const translations = {
     ...profileTranslations.en,
     ...footerTranslations.en,
     ...notFoundTranslations.en,
+    ...authTranslations.en,
   },
   "pt-br": {
     ...navTranslations["pt-br"],
@@ -25,5 +27,6 @@ export const translations = {
     ...profileTranslations["pt-br"],
     ...footerTranslations["pt-br"],
     ...notFoundTranslations["pt-br"],
+    ...authTranslations["pt-br"],
   }
 };

@@ -8,29 +8,34 @@ import Index from "./pages/Index";
 import Courses from "./pages/Courses";
 import Profile from "./pages/Profile";
 import Mentors from "./pages/Mentors";
+import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import { LanguageProvider } from "./contexts/LanguageContext";
+import { AuthProvider } from "./contexts/AuthContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <LanguageProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/courses" element={<Courses />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/mentors" element={<Mentors />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </LanguageProvider>
+    <BrowserRouter>
+      <LanguageProvider>
+        <AuthProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/courses" element={<Courses />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/mentors" element={<Mentors />} />
+              <Route path="/auth" element={<Auth />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </TooltipProvider>
+        </AuthProvider>
+      </LanguageProvider>
+    </BrowserRouter>
   </QueryClientProvider>
 );
 

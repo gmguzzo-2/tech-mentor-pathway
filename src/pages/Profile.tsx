@@ -1,21 +1,19 @@
+import { useEffect } from "react";
+import { Navigate } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import ProfileForm from "@/components/profile/ProfileForm";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
-import { 
-  UserRound,
-  BookOpen, 
-  Clock, 
-  BarChart3,
-  Award,
-  Settings,
-  Bell
-} from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 import { useTranslations } from "@/hooks/useTranslations";
 
 const Profile = () => {
+  const { user, isLoading } = useAuth();
   const { t } = useTranslations();
+  
+  // If not logged in and finished loading, redirect to auth page
+  if (!isLoading && !user) {
+    return <Navigate to="/auth" replace />;
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />

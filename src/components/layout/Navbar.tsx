@@ -1,15 +1,17 @@
 
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Search, User, BookOpen, UsersRound, Bell } from "lucide-react";
+import { Search, User, BookOpen, UsersRound, Bell, LogIn, UserPlus } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { useTranslations } from "@/hooks/useTranslations";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { t } = useTranslations();
+  const { user, signOut } = useAuth();
 
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50">
@@ -42,12 +44,30 @@ const Navbar = () => {
             <Link to="/community" className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-techblue">{t('nav.community')}</Link>
             <div className="flex items-center space-x-3 ml-4">
               <LanguageSwitcher />
-              <Button variant="ghost" size="icon" className="relative">
-                <Bell size={20} />
-                <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
-              </Button>
-              <Button variant="outline">{t('nav.signIn')}</Button>
-              <Button>{t('nav.signUp')}</Button>
+              {user ? (
+                <>
+                  <Button variant="ghost" size="icon" className="relative">
+                    <Bell size={20} />
+                    <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
+                  </Button>
+                  <Link to="/profile">
+                    <Button variant="outline" className="flex items-center">
+                      <User size={16} className="mr-2" />
+                      {t('nav.profile')}
+                    </Button>
+                  </Link>
+                  <Button onClick={() => signOut()}>{t('nav.signOut')}</Button>
+                </>
+              ) : (
+                <>
+                  <Link to="/auth">
+                    <Button variant="outline">{t('nav.signIn')}</Button>
+                  </Link>
+                  <Link to="/auth?mode=signup">
+                    <Button>{t('nav.signUp')}</Button>
+                  </Link>
+                </>
+              )}
             </div>
           </div>
 
@@ -57,10 +77,12 @@ const Navbar = () => {
               <Search size={20} />
             </Button>
             <LanguageSwitcher />
-            <Button variant="ghost" size="icon" className="relative">
-              <Bell size={20} />
-              <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
-            </Button>
+            {user && (
+              <Button variant="ghost" size="icon" className="relative">
+                <Bell size={20} />
+                <span className="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
+              </Button>
+            )}
             <Button variant="ghost" size="icon" onClick={() => setIsMenuOpen(!isMenuOpen)}>
               <div className="w-6 flex flex-col items-center justify-center">
                 <span className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${isMenuOpen ? 'rotate-45 translate-y-1' : '-translate-y-0.5'}`}></span>
@@ -84,8 +106,35 @@ const Navbar = () => {
               {t('nav.community')}
             </Link>
             <div className="pt-4 flex flex-col space-y-2">
-              <Button variant="outline" className="w-full justify-center">{t('nav.signIn')}</Button>
-              <Button className="w-full justify-center">{t('nav.signUp')}</Button>
+              {user ? (
+                <>
+                  <Link to="/profile">
+                    <Button variant="outline" className="w-full justify-center flex items-center">
+                      <User size={16} className="mr-2" />
+                      {t('nav.profile')}
+                    </Button>
+                  </Link>
+                  <Button 
+                    className="w-full justify-center"
+                    onClick={() => signOut()}
+                  >
+                    {t('nav.signOut')}
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Link to="/auth">
+                    <Button variant="outline" className="w-full justify-center">
+                      {t('nav.signIn')}
+                    </Button>
+                  </Link>
+                  <Link to="/auth?mode=signup">
+                    <Button className="w-full justify-center">
+                      {t('nav.signUp')}
+                    </Button>
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         )}

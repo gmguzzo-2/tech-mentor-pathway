@@ -8,6 +8,7 @@ export const navTranslations = {
       profile: "Profile",
       signIn: "Sign In",
       signUp: "Sign Up",
+      signOut: "Sign Out",
       search: "Search courses, mentors, or topics...",
     }
   },
@@ -19,6 +20,7 @@ export const navTranslations = {
       profile: "Perfil",
       signIn: "Entrar",
       signUp: "Cadastrar",
+      signOut: "Sair",
       search: "Pesquisar cursos, mentores ou tópicos...",
     }
   }
