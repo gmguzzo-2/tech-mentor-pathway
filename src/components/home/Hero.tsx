@@ -75,7 +75,7 @@ const Hero = () => {
                 </div>
                 <div className="flex items-center">
                   <BookOpen className="text-gray-400 h-4 w-4 mr-2" />
-                  <span className="text-sm text-gray-600">{t('home.coursesIncluded', { count: 12 })}</span>
+                  <span className="text-sm text-gray-600">{t('home.coursesIncluded')}</span>
                 </div>
                 <div className="flex items-center">
                   <Award className="text-gray-400 h-4 w-4 mr-2" />
