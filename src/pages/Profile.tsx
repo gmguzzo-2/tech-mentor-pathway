@@ -1,9 +1,22 @@
+
 import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { useAuth } from "@/contexts/AuthContext";
 import { useTranslations } from "@/hooks/useTranslations";
+import { 
+  UserRound, 
+  BookOpen, 
+  BarChart3, 
+  Clock, 
+  Award, 
+  Bell, 
+  Settings 
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import ProfileForm from "@/components/profile/ProfileForm";
 
 const Profile = () => {
   const { user, isLoading } = useAuth();
