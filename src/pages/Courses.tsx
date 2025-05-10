@@ -21,7 +21,6 @@ import {
 import {
   Slider
 } from "@/components/ui/slider";
-import { courses } from "@/lib/data";
 
 const Courses = () => {
   const [showFilters, setShowFilters] = useState(false);
@@ -275,7 +274,7 @@ const Courses = () => {
             {/* Courses list */}
             <div className={`w-full ${showFilters ? 'lg:w-3/4' : 'w-full'}`}>
               <div className="bg-white p-6 rounded-lg shadow-sm">
-                <CourseList courses={courses} />
+                <CourseList showCreateButton={true} />
               </div>
             </div>
           </div>
