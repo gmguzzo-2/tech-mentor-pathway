@@ -39,7 +39,7 @@ const courseFormSchema = z.object({
   rating: z.coerce.number().min(0, "Rating must be at least 0").max(5, "Rating must be at most 5").optional(),
   reviews: z.coerce.number().min(0, "Reviews must be at least 0").optional(),
   featured: z.boolean().optional(),
-  tags: z.string().transform(val => val.split(',').map(tag => tag.trim())).optional(),
+  tags: z.string().optional(),
 });
 
 type CourseFormValues = z.infer<typeof courseFormSchema>;
@@ -69,7 +69,7 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
         rating: 0,
         reviews: 0,
         featured: false,
-        tags: "", // This will be transformed to string[] by zod schema
+        tags: "",
       };
     }
 
@@ -80,7 +80,7 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
     
     return {
       ...initialData,
-      tags: tagsString // This will be transformed to string[] by zod schema
+      tags: tagsString
     };
   };
 
@@ -106,8 +106,7 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
         rating: Number(data.rating || 0),
         reviews: Number(data.reviews || 0),
         featured: Boolean(data.featured),
-        // Ensure tags is treated as an array
-        tags: Array.isArray(data.tags) ? data.tags : (data.tags ? data.tags.split(',').map(tag => tag.trim()) : []),
+        tags: data.tags ? data.tags.split(',').map(tag => tag.trim()) : [],
       };
 
       if (isEditing && initialData?.id) {
