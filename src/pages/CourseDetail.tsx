@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
@@ -209,7 +210,7 @@ const CourseDetail = () => {
                   <div className="text-right">
                     <div className="text-3xl font-bold text-techblue">{formattedPrice}</div>
                     {course.featured && (
-                      <Badge className="bg-techpurple mt-2">{t('courses.featured')}</Badge>
+                      <Badge className="bg-techpurple mt-2">{t('courses.featured.label')}</Badge>
                     )}
                   </div>
                 </div>

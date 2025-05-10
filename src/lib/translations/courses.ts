@@ -1,5 +1,6 @@
+
 export const coursesEn = {
-  title: "Courses",
+  courses: "Courses",
   createNew: "Create New Course",
   edit: "Edit Course",
   search: "Search courses...",
@@ -18,7 +19,11 @@ export const coursesEn = {
   tryAgainLater: "Please try again later",
   notFound: "Course not found",
   viewCourse: "View Course",
-  featured: "Featured",
+  featured: {
+    label: "Featured",
+    courseBadge: "Featured Course",
+    help: "Featured courses appear prominently on the homepage"
+  },
   description: "Description",
   tags: "Tags",
   enroll: "Enroll Now",
@@ -34,26 +39,26 @@ export const coursesEn = {
   deleteError: "There was an error deleting your course",
   confirmDelete: "Delete Course?",
   deleteWarning: "This action cannot be undone. This will permanently delete the course.",
-  title: "Title",
-  titlePlaceholder: "Enter course title",
-  provider: "Provider",
-  providerPlaceholder: "Enter course provider (e.g., Udemy, Coursera)",
-  imageUrl: "Image URL",
-  imageUrlPlaceholder: "Enter image URL",
-  level: "Level",
-  selectLevel: "Select level",
-  category: "Category",
-  selectCategory: "Select category",
-  duration: "Duration",
-  durationPlaceholder: "e.g., 10 hours, 4 weeks",
-  price: "Price",
-  rating: "Rating",
-  reviews: "Reviews",
-  tagsPlaceholder: "Enter tags separated by commas",
-  tagsHelp: "Add relevant tags to help students find your course",
-  descriptionPlaceholder: "Provide a detailed description of your course",
-  featured: "Featured Course",
-  featuredHelp: "Featured courses appear prominently on the homepage",
+  fields: {
+    title: "Title",
+    titlePlaceholder: "Enter course title",
+    provider: "Provider",
+    providerPlaceholder: "Enter course provider (e.g., Udemy, Coursera)",
+    imageUrl: "Image URL",
+    imageUrlPlaceholder: "Enter image URL",
+    level: "Level",
+    selectLevel: "Select level",
+    category: "Category",
+    selectCategory: "Select category",
+    duration: "Duration",
+    durationPlaceholder: "e.g., 10 hours, 4 weeks",
+    price: "Price",
+    rating: "Rating",
+    reviews: "Reviews",
+    tagsPlaceholder: "Enter tags separated by commas",
+    tagsHelp: "Add relevant tags to help students find your course",
+    descriptionPlaceholder: "Provide a detailed description of your course"
+  },
   levels: {
     beginner: "Beginner",
     intermediate: "Intermediate",
@@ -69,7 +74,7 @@ export const coursesEn = {
 };
 
 export const coursesPt = {
-  title: "Cursos",
+  courses: "Cursos",
   createNew: "Criar Novo Curso",
   edit: "Editar Curso",
   search: "Buscar cursos...",
@@ -88,7 +93,11 @@ export const coursesPt = {
   tryAgainLater: "Por favor, tente novamente mais tarde",
   notFound: "Curso não encontrado",
   viewCourse: "Ver Curso",
-  featured: "Destaque",
+  featured: {
+    label: "Destaque",
+    courseBadge: "Curso em Destaque",
+    help: "Cursos em destaque aparecem com destaque na página inicial"
+  },
   description: "Descrição",
   tags: "Tags",
   enroll: "Inscrever-se Agora",
@@ -104,25 +113,26 @@ export const coursesPt = {
   deleteError: "Ocorreu um erro ao excluir seu curso",
   confirmDelete: "Excluir Curso?",
   deleteWarning: "Esta ação não pode ser desfeita. Isso excluirá permanentemente o curso.",
-  titlePlaceholder: "Digite o título do curso",
-  provider: "Provedor",
-  providerPlaceholder: "Digite o provedor do curso (ex: Udemy, Coursera)",
-  imageUrl: "URL da Imagem",
-  imageUrlPlaceholder: "Digite a URL da imagem",
-  level: "Nível",
-  selectLevel: "Selecione o nível",
-  category: "Categoria",
-  selectCategory: "Selecione a categoria",
-  duration: "Duração",
-  durationPlaceholder: "ex: 10 horas, 4 semanas",
-  price: "Preço",
-  rating: "Avaliação",
-  reviews: "Avaliações",
-  tagsPlaceholder: "Digite tags separadas por vírgulas",
-  tagsHelp: "Adicione tags relevantes para ajudar os alunos a encontrar seu curso",
-  descriptionPlaceholder: "Forneça uma descrição detalhada do seu curso",
-  featured: "Curso em Destaque",
-  featuredHelp: "Cursos em destaque aparecem com destaque na página inicial",
+  fields: {
+    title: "Título",
+    titlePlaceholder: "Digite o título do curso",
+    provider: "Provedor",
+    providerPlaceholder: "Digite o provedor do curso (ex: Udemy, Coursera)",
+    imageUrl: "URL da Imagem",
+    imageUrlPlaceholder: "Digite a URL da imagem",
+    level: "Nível",
+    selectLevel: "Selecione o nível",
+    category: "Categoria",
+    selectCategory: "Selecione a categoria",
+    duration: "Duração",
+    durationPlaceholder: "ex: 10 horas, 4 semanas",
+    price: "Preço",
+    rating: "Avaliação",
+    reviews: "Avaliações",
+    tagsPlaceholder: "Digite tags separadas por vírgulas",
+    tagsHelp: "Adicione tags relevantes para ajudar os alunos a encontrar seu curso",
+    descriptionPlaceholder: "Forneça uma descrição detalhada do seu curso"
+  },
   levels: {
     beginner: "Iniciante",
     intermediate: "Intermediário",
@@ -135,4 +145,10 @@ export const coursesPt = {
     devOps: "DevOps",
     design: "Design"
   }
+};
+
+// Export the translations with the correct name
+export const coursesTranslations = {
+  en: coursesEn,
+  "pt-br": coursesPt
 };

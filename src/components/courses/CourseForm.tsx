@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -57,7 +58,7 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
   // Convert tags array to comma-separated string for form display
   const formattedData = initialData ? {
     ...initialData,
-    tags: initialData.tags ? initialData.tags.join(", ") : "",
+    tags: Array.isArray(initialData.tags) ? initialData.tags.join(", ") : "",
   } : undefined;
 
   // Initialize the form with zod resolver
@@ -134,9 +135,9 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
             name="title"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t('courses.title')}</FormLabel>
+                <FormLabel>{t('courses.fields.title')}</FormLabel>
                 <FormControl>
-                  <Input placeholder={t('courses.titlePlaceholder')} {...field} />
+                  <Input placeholder={t('courses.fields.titlePlaceholder')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -149,9 +150,9 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
             name="provider"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t('courses.provider')}</FormLabel>
+                <FormLabel>{t('courses.fields.provider')}</FormLabel>
                 <FormControl>
-                  <Input placeholder={t('courses.providerPlaceholder')} {...field} />
+                  <Input placeholder={t('courses.fields.providerPlaceholder')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -164,9 +165,9 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
             name="image_url"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t('courses.imageUrl')}</FormLabel>
+                <FormLabel>{t('courses.fields.imageUrl')}</FormLabel>
                 <FormControl>
-                  <Input placeholder={t('courses.imageUrlPlaceholder')} {...field} />
+                  <Input placeholder={t('courses.fields.imageUrlPlaceholder')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -179,11 +180,11 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
             name="level"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t('courses.level')}</FormLabel>
+                <FormLabel>{t('courses.fields.level')}</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder={t('courses.selectLevel')} />
+                      <SelectValue placeholder={t('courses.fields.selectLevel')} />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -203,11 +204,11 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
             name="category"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t('courses.category')}</FormLabel>
+                <FormLabel>{t('courses.fields.category')}</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder={t('courses.selectCategory')} />
+                      <SelectValue placeholder={t('courses.fields.selectCategory')} />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
@@ -229,9 +230,9 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
             name="duration"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t('courses.duration')}</FormLabel>
+                <FormLabel>{t('courses.fields.duration')}</FormLabel>
                 <FormControl>
-                  <Input placeholder={t('courses.durationPlaceholder')} {...field} />
+                  <Input placeholder={t('courses.fields.durationPlaceholder')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -244,7 +245,7 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
             name="price"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t('courses.price')}</FormLabel>
+                <FormLabel>{t('courses.fields.price')}</FormLabel>
                 <FormControl>
                   <Input type="number" step="0.01" min="0" {...field} />
                 </FormControl>
@@ -259,7 +260,7 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
             name="rating"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t('courses.rating')}</FormLabel>
+                <FormLabel>{t('courses.fields.rating')}</FormLabel>
                 <FormControl>
                   <Input type="number" step="0.1" min="0" max="5" {...field} />
                 </FormControl>
@@ -274,7 +275,7 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
             name="reviews"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t('courses.reviews')}</FormLabel>
+                <FormLabel>{t('courses.fields.reviews')}</FormLabel>
                 <FormControl>
                   <Input type="number" min="0" {...field} />
                 </FormControl>
@@ -291,10 +292,10 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
               <FormItem className="col-span-1 md:col-span-2">
                 <FormLabel>{t('courses.tags')}</FormLabel>
                 <FormControl>
-                  <Input placeholder={t('courses.tagsPlaceholder')} {...field} />
+                  <Input placeholder={t('courses.fields.tagsPlaceholder')} {...field} />
                 </FormControl>
                 <FormMessage />
-                <p className="text-xs text-gray-500">{t('courses.tagsHelp')}</p>
+                <p className="text-xs text-gray-500">{t('courses.fields.tagsHelp')}</p>
               </FormItem>
             )}
           />
@@ -308,7 +309,7 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
                 <FormLabel>{t('courses.description')}</FormLabel>
                 <FormControl>
                   <Textarea 
-                    placeholder={t('courses.descriptionPlaceholder')} 
+                    placeholder={t('courses.fields.descriptionPlaceholder')} 
                     rows={5}
                     {...field} 
                   />
@@ -333,8 +334,8 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
                   />
                 </FormControl>
                 <div className="space-y-1 leading-none">
-                  <FormLabel>{t('courses.featured')}</FormLabel>
-                  <p className="text-sm text-gray-500">{t('courses.featuredHelp')}</p>
+                  <FormLabel>{t('courses.featured.courseBadge')}</FormLabel>
+                  <p className="text-sm text-gray-500">{t('courses.featured.help')}</p>
                 </div>
               </FormItem>
             )}
