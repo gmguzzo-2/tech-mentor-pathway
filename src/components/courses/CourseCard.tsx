@@ -13,7 +13,7 @@ interface CourseCardProps {
 }
 
 const CourseCard = ({ course, featured = false }: CourseCardProps) => {
-  const { id, title, provider, description, image_url, level, category, duration, rating, reviews, price, tags } = course;
+  const { id, title, provider, description, level, category, duration, rating, reviews, price, tags } = course;
   const { t } = useTranslations();
   
   // Format price to show as currency
@@ -22,11 +22,14 @@ const CourseCard = ({ course, featured = false }: CourseCardProps) => {
     currency: 'BRL' 
   }).format(price);
 
+  // Use image_url first, then fall back to imageUrl for backwards compatibility
+  const imageSource = course.image_url || course.imageUrl || '/placeholder.svg';
+
   return (
     <Card className={`overflow-hidden transition-all duration-300 hover:shadow-lg ${featured ? 'border-l-4 border-techpurple' : ''}`}>
       <div className="relative">
         <img 
-          src={image_url || '/placeholder.svg'} 
+          src={imageSource} 
           alt={title} 
           className="w-full h-48 object-cover"
         />

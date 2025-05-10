@@ -7,7 +7,7 @@ export type CourseFormData = {
   description?: string | null;
   provider: string;
   image_url?: string | null;
-  level: string;
+  level: "Beginner" | "Intermediate" | "Advanced";
   category: string;
   duration: string;
   rating?: number;

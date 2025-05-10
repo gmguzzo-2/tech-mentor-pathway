@@ -52,7 +52,7 @@ const CourseDetail = () => {
           // Make sure we have a properly formatted course object
           const formattedCourse: Course = {
             ...courseData,
-            imageUrl: courseData.image_url
+            imageUrl: courseData.image_url // For backward compatibility
           };
           setCourse(formattedCourse);
         }
@@ -97,6 +97,9 @@ const CourseDetail = () => {
         currency: 'BRL' 
       }).format(course.price)
     : '';
+
+  // Use image_url first, then fall back to imageUrl for backwards compatibility
+  const imageSource = course?.image_url || course?.imageUrl || '/placeholder.svg';
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -143,7 +146,7 @@ const CourseDetail = () => {
               {/* Course Image */}
               <div className="relative h-64">
                 <img 
-                  src={course.image_url || '/placeholder.svg'} 
+                  src={imageSource} 
                   alt={course.title} 
                   className="w-full h-full object-cover"
                 />

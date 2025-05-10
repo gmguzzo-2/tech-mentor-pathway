@@ -1,3 +1,4 @@
+
 export interface Course {
   id: string;
   title: string;
@@ -5,7 +6,7 @@ export interface Course {
   description: string | null;
   image_url: string | null;
   imageUrl?: string; // Keep for backward compatibility
-  level: string;
+  level: "Beginner" | "Intermediate" | "Advanced";
   category: string;
   duration: string;
   rating: number;
@@ -44,7 +45,8 @@ export const courses: Course[] = [
     title: 'Complete Web Development Bootcamp',
     provider: 'Udemy',
     description: 'Learn web development from scratch with HTML, CSS, JavaScript, React, Node.js, and more.',
-    imageUrl: '/placeholder.svg',
+    image_url: '/placeholder.svg',
+    imageUrl: '/placeholder.svg', // For backward compatibility
     level: 'Beginner',
     category: 'Web Development',
     duration: '40 hours',
@@ -58,6 +60,7 @@ export const courses: Course[] = [
     title: 'Python for Data Science and Machine Learning',
     provider: 'Udemy',
     description: 'Learn Python for data analysis, visualization, machine learning, and deep learning.',
+    image_url: '/placeholder.svg',
     imageUrl: '/placeholder.svg',
     level: 'Intermediate',
     category: 'Data Science',
@@ -72,6 +75,7 @@ export const courses: Course[] = [
     title: 'Java Masterclass: From Beginner to Expert',
     provider: 'Alura',
     description: 'Comprehensive Java course covering beginner to advanced concepts with practical projects.',
+    image_url: '/placeholder.svg',
     imageUrl: '/placeholder.svg',
     level: 'Beginner',
     category: 'Programming',
@@ -86,6 +90,7 @@ export const courses: Course[] = [
     title: 'DevOps Engineering: CI/CD with AWS',
     provider: 'Alura',
     description: 'Learn DevOps practices using AWS, Docker, Kubernetes, Jenkins, and more.',
+    image_url: '/placeholder.svg',
     imageUrl: '/placeholder.svg',
     level: 'Advanced',
     category: 'DevOps',
@@ -100,6 +105,7 @@ export const courses: Course[] = [
     title: 'UI/UX Design: Creating User-Centered Interfaces',
     provider: 'Udemy',
     description: 'Learn modern UI/UX design principles and tools to create beautiful, user-friendly interfaces.',
+    image_url: '/placeholder.svg',
     imageUrl: '/placeholder.svg',
     level: 'Intermediate',
     category: 'Design',
@@ -114,6 +120,7 @@ export const courses: Course[] = [
     title: 'Cybersecurity Fundamentals',
     provider: 'Alura',
     description: 'Essential cybersecurity concepts, tools, and practices to secure systems and networks.',
+    image_url: '/placeholder.svg',
     imageUrl: '/placeholder.svg',
     level: 'Beginner',
     category: 'Security',

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -59,7 +58,7 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
   const formattedData = initialData ? {
     ...initialData,
     tags: initialData.tags ? initialData.tags.join(", ") : "",
-    image_url: initialData.image_url || initialData.imageUrl || "",
+    // Keep image_url as is
   } : undefined;
 
   // Initialize the form with zod resolver
@@ -86,13 +85,19 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
     try {
       // Parse the numeric values
       const courseData: CourseFormData = {
-        ...data,
+        title: data.title,
+        description: data.description,
+        provider: data.provider,
+        image_url: data.image_url || null,
+        level: data.level,
+        category: data.category,
+        duration: data.duration,
         price: Number(data.price),
         rating: Number(data.rating || 0),
         reviews: Number(data.reviews || 0),
         featured: Boolean(data.featured),
-        tags: typeof data.tags === 'string' ? data.tags.split(',').map(tag => tag.trim()) : 
-              Array.isArray(data.tags) ? data.tags : [],
+        tags: Array.isArray(data.tags) ? data.tags : 
+              typeof data.tags === 'string' ? data.tags.split(',').map(tag => tag.trim()) : [],
       };
 
       if (isEditing && initialData?.id) {

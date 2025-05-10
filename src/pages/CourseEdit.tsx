@@ -26,7 +26,7 @@ const CourseEdit = () => {
           // Make sure we have a properly formatted course object
           const formattedCourse: Course = {
             ...courseData,
-            imageUrl: courseData.image_url
+            imageUrl: courseData.image_url // For backward compatibility
           };
           setCourse(formattedCourse);
         }
