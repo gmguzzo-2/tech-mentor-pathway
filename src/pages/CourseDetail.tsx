@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
@@ -49,11 +48,20 @@ const CourseDetail = () => {
       try {
         if (id) {
           const courseData = await fetchCourseById(id);
-          // Make sure we have a properly formatted course object
+          
+          // Ensure level is one of the allowed values
+          let level: "Beginner" | "Intermediate" | "Advanced" = "Beginner";
+          if (courseData.level === "Intermediate" || courseData.level === "Advanced") {
+            level = courseData.level;
+          }
+          
+          // Format data to match Course interface
           const formattedCourse: Course = {
             ...courseData,
+            level,
             imageUrl: courseData.image_url // For backward compatibility
           };
+          
           setCourse(formattedCourse);
         }
       } catch (err) {

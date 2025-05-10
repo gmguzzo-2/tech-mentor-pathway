@@ -1,11 +1,9 @@
-
 export interface Course {
   id: string;
   title: string;
   provider: string;
   description: string | null;
   image_url: string | null;
-  imageUrl?: string; // Keep for backward compatibility
   level: "Beginner" | "Intermediate" | "Advanced";
   category: string;
   duration: string;
@@ -17,6 +15,8 @@ export interface Course {
   user_id?: string;
   created_at?: string;
   updated_at?: string;
+  // Keep backward compatibility field
+  imageUrl?: string;
 }
 
 export interface Mentor {

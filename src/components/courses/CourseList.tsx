@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -53,11 +52,22 @@ const CourseList = ({ courses: propsCourses, title, showFilters = true, showCrea
     const loadCourses = async () => {
       try {
         const data = await fetchCourses();
-        // Map database fields to match Course interface if needed
-        const formattedData: Course[] = data.map(course => ({
-          ...course,
-          imageUrl: course.image_url
-        }));
+        
+        // Map database fields to match Course interface, ensuring level is correctly typed
+        const formattedData: Course[] = data.map(course => {
+          // Ensure level is one of the allowed values
+          let level: "Beginner" | "Intermediate" | "Advanced" = "Beginner";
+          if (course.level === "Intermediate" || course.level === "Advanced") {
+            level = course.level;
+          }
+          
+          return {
+            ...course,
+            imageUrl: course.image_url, // For backward compatibility
+            level
+          };
+        });
+        
         setCourses(formattedData);
       } catch (err) {
         console.error("Error fetching courses:", err);

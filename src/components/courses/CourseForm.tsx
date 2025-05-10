@@ -58,7 +58,6 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
   const formattedData = initialData ? {
     ...initialData,
     tags: initialData.tags ? initialData.tags.join(", ") : "",
-    // Keep image_url as is
   } : undefined;
 
   // Initialize the form with zod resolver
@@ -83,7 +82,7 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
   const onSubmit = async (data: CourseFormValues) => {
     setIsSubmitting(true);
     try {
-      // Parse the numeric values
+      // Prepare the course data
       const courseData: CourseFormData = {
         title: data.title,
         description: data.description,
@@ -96,8 +95,7 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
         rating: Number(data.rating || 0),
         reviews: Number(data.reviews || 0),
         featured: Boolean(data.featured),
-        tags: Array.isArray(data.tags) ? data.tags : 
-              typeof data.tags === 'string' ? data.tags.split(',').map(tag => tag.trim()) : [],
+        tags: Array.isArray(data.tags) ? data.tags : [],
       };
 
       if (isEditing && initialData?.id) {
