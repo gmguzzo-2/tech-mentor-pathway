@@ -39,6 +39,7 @@ export const coursesEn = {
   deleteError: "There was an error deleting your course",
   confirmDelete: "Delete Course?",
   deleteWarning: "This action cannot be undone. This will permanently delete the course.",
+  title: "All Courses",
   fields: {
     title: "Title",
     titlePlaceholder: "Enter course title",
@@ -113,6 +114,7 @@ export const coursesPt = {
   deleteError: "Ocorreu um erro ao excluir seu curso",
   confirmDelete: "Excluir Curso?",
   deleteWarning: "Esta ação não pode ser desfeita. Isso excluirá permanentemente o curso.",
+  title: "Todos os Cursos",
   fields: {
     title: "Título",
     titlePlaceholder: "Digite o título do curso",

@@ -26,10 +26,16 @@ function getNestedProperty(obj: NestedObject, path: string): NestedValue {
   let current: NestedValue = obj;
   
   for (const key of keys) {
-    if (!isNestedObject(current) || current[key] === undefined) {
-      console.warn(`Translation key not found: ${path}`);
+    if (!isNestedObject(current)) {
+      console.error(`Translation key "${path}" resolves to a non-object at "${key}".`);
       return path;
     }
+    
+    if (current[key] === undefined) {
+      console.error(`Translation key "${path}" not found at part "${key}".`);
+      return path;
+    }
+    
     current = current[key];
   }
   
@@ -40,16 +46,21 @@ export function useTranslations() {
   const { language } = useLanguage();
   
   const t = (key: string): string => {
-    // Cast to unknown first, then to NestedObject to avoid TypeScript errors
-    const langTranslations = translations[language] as unknown as NestedObject;
-    const value = getNestedProperty(langTranslations, key);
-    
-    if (!isString(value)) {
-      console.warn(`Translation key resolves to a non-string value: ${key}`);
+    try {
+      // Cast to unknown first, then to NestedObject to avoid TypeScript errors
+      const langTranslations = translations[language] as unknown as NestedObject;
+      const value = getNestedProperty(langTranslations, key);
+      
+      if (!isString(value)) {
+        console.warn(`Translation key resolves to a non-string value: ${key}`);
+        return key;
+      }
+      
+      return value;
+    } catch (error) {
+      console.error(`Error translating key "${key}":`, error);
       return key;
     }
-    
-    return value;
   };
   
   return { t };

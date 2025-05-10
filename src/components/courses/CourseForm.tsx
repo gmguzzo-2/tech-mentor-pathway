@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -76,7 +77,9 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
     // Convert tags array to string for the form
     const tagsString = Array.isArray(initialData.tags) 
       ? initialData.tags.join(", ") 
-      : "";
+      : typeof initialData.tags === 'string'
+        ? initialData.tags
+        : "";
     
     return {
       ...initialData,
@@ -344,7 +347,7 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
                   />
                 </FormControl>
                 <div className="space-y-1 leading-none">
-                  <FormLabel>{t('courses.featured.courseBadge')}</FormLabel>
+                  <FormLabel>{t('courses.featured.label')}</FormLabel>
                   <p className="text-sm text-gray-500">{t('courses.featured.help')}</p>
                 </div>
               </FormItem>
@@ -362,7 +365,7 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
             {t('common.cancel')}
           </Button>
           <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? t('common.submitting') : isEditing ? t('common.update') : t('common.create')}
+            {isSubmitting ? t('common.submitting') : isEditing ? t('common.update') : t('courses.create')}
           </Button>
         </div>
       </form>
