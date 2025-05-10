@@ -30,11 +30,14 @@ const CourseEdit = () => {
             level = courseData.level;
           }
           
-          // Format data to match Course interface
+          // Format data to match Course interface and ensure tags is an array
           const formattedCourse: Course = {
             ...courseData,
             level,
-            imageUrl: courseData.image_url // For backward compatibility
+            imageUrl: courseData.image_url, // For backward compatibility
+            // Ensure tags is always an array
+            tags: Array.isArray(courseData.tags) ? courseData.tags : 
+                 (courseData.tags ? [courseData.tags] : [])
           };
           
           setCourse(formattedCourse);

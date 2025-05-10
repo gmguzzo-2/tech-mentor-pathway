@@ -55,10 +55,15 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Convert tags array to comma-separated string for form display
+  // Process tags properly for the form
+  // If tags is an array, join it to a string; otherwise use empty string
+  const formattedTags = initialData?.tags ? 
+    (Array.isArray(initialData.tags) ? initialData.tags.join(", ") : "") : "";
+  
+  // Convert initial data to form format
   const formattedData = initialData ? {
     ...initialData,
-    tags: Array.isArray(initialData.tags) ? initialData.tags.join(", ") : "",
+    tags: formattedTags
   } : undefined;
 
   // Initialize the form with zod resolver

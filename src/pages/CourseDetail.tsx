@@ -60,7 +60,10 @@ const CourseDetail = () => {
           const formattedCourse: Course = {
             ...courseData,
             level,
-            imageUrl: courseData.image_url // For backward compatibility
+            imageUrl: courseData.image_url, // For backward compatibility
+            // Ensure tags is always an array
+            tags: Array.isArray(courseData.tags) ? courseData.tags : 
+                 (courseData.tags ? [courseData.tags] : [])
           };
           
           setCourse(formattedCourse);
