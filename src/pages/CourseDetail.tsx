@@ -49,7 +49,12 @@ const CourseDetail = () => {
       try {
         if (id) {
           const courseData = await fetchCourseById(id);
-          setCourse(courseData);
+          // Make sure we have a properly formatted course object
+          const formattedCourse: Course = {
+            ...courseData,
+            imageUrl: courseData.image_url
+          };
+          setCourse(formattedCourse);
         }
       } catch (err) {
         console.error("Error loading course:", err);
@@ -138,7 +143,7 @@ const CourseDetail = () => {
               {/* Course Image */}
               <div className="relative h-64">
                 <img 
-                  src={course.imageUrl || course.image_url || '/placeholder.svg'} 
+                  src={course.image_url || '/placeholder.svg'} 
                   alt={course.title} 
                   className="w-full h-full object-cover"
                 />

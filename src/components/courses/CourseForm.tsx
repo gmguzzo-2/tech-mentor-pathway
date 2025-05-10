@@ -25,6 +25,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { CourseFormData, createCourse, updateCourse } from "@/services/courseService";
+import { Course } from "@/lib/data";
 
 // Define form schema using zod
 const courseFormSchema = z.object({
@@ -45,7 +46,7 @@ const courseFormSchema = z.object({
 type CourseFormValues = z.infer<typeof courseFormSchema>;
 
 interface CourseFormProps {
-  initialData?: CourseFormData & { id?: string };
+  initialData?: Course;
   isEditing?: boolean;
 }
 
@@ -55,10 +56,11 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Convert tags array to comma-separated string for form display
-  const formattedData = {
+  const formattedData = initialData ? {
     ...initialData,
-    tags: initialData?.tags ? initialData.tags.join(", ") : "",
-  };
+    tags: initialData.tags ? initialData.tags.join(", ") : "",
+    image_url: initialData.image_url || initialData.imageUrl || "",
+  } : undefined;
 
   // Initialize the form with zod resolver
   const form = useForm<CourseFormValues>({
@@ -89,9 +91,8 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
         rating: Number(data.rating || 0),
         reviews: Number(data.reviews || 0),
         featured: Boolean(data.featured),
-        tags: Array.isArray(data.tags) ? data.tags : 
-              typeof data.tags === 'string' ? data.tags.split(',').map(tag => tag.trim()) : 
-              [],
+        tags: typeof data.tags === 'string' ? data.tags.split(',').map(tag => tag.trim()) : 
+              Array.isArray(data.tags) ? data.tags : [],
       };
 
       if (isEditing && initialData?.id) {

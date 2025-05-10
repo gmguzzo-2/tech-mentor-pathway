@@ -23,7 +23,12 @@ const CourseEdit = () => {
       try {
         if (id) {
           const courseData = await fetchCourseById(id);
-          setCourse(courseData);
+          // Make sure we have a properly formatted course object
+          const formattedCourse: Course = {
+            ...courseData,
+            imageUrl: courseData.image_url
+          };
+          setCourse(formattedCourse);
         }
       } catch (err) {
         console.error("Error loading course:", err);

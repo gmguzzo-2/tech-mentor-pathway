@@ -1,17 +1,21 @@
-
 export interface Course {
   id: string;
   title: string;
-  provider: 'Udemy' | 'Alura';
-  description: string;
-  imageUrl: string;
-  level: 'Beginner' | 'Intermediate' | 'Advanced';
+  provider: string;
+  description: string | null;
+  image_url: string | null;
+  imageUrl?: string; // Keep for backward compatibility
+  level: string;
   category: string;
   duration: string;
   rating: number;
   reviews: number;
   price: number;
   tags: string[];
+  featured?: boolean;
+  user_id?: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface Mentor {

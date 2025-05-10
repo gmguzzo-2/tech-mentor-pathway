@@ -53,7 +53,12 @@ const CourseList = ({ courses: propsCourses, title, showFilters = true, showCrea
     const loadCourses = async () => {
       try {
         const data = await fetchCourses();
-        setCourses(data);
+        // Map database fields to match Course interface if needed
+        const formattedData: Course[] = data.map(course => ({
+          ...course,
+          imageUrl: course.image_url
+        }));
+        setCourses(formattedData);
       } catch (err) {
         console.error("Error fetching courses:", err);
         setError(t('courses.loadError'));
@@ -77,7 +82,7 @@ const CourseList = ({ courses: propsCourses, title, showFilters = true, showCrea
   const sortedCourses = [...filteredCourses].sort((a, b) => {
     switch (sortBy) {
       case 'newest':
-        return new Date(b.created_at || b.createdAt).getTime() - new Date(a.created_at || a.createdAt).getTime();
+        return new Date(b.created_at || '').getTime() - new Date(a.created_at || '').getTime();
       case 'rating-high':
         return b.rating - a.rating;
       case 'price-low':

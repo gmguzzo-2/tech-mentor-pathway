@@ -2,7 +2,20 @@
 import { supabase } from "@/integrations/supabase/client";
 import { Course } from "@/lib/data";
 
-export type CourseFormData = Omit<Course, 'id' | 'created_at' | 'updated_at'>;
+export type CourseFormData = {
+  title: string;
+  description?: string | null;
+  provider: string;
+  image_url?: string | null;
+  level: string;
+  category: string;
+  duration: string;
+  rating?: number;
+  reviews?: number;
+  price: number;
+  tags?: string[];
+  featured?: boolean;
+};
 
 /**
  * Fetches all courses from the database.
