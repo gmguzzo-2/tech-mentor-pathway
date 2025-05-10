@@ -56,33 +56,40 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Process tags properly for the form
-  // If tags is an array, join it to a string; otherwise use empty string
-  const formattedTags = initialData?.tags ? 
-    (Array.isArray(initialData.tags) ? initialData.tags.join(", ") : "") : "";
-  
-  // Convert initial data to form format
-  const formattedData = initialData ? {
-    ...initialData,
-    tags: formattedTags
-  } : undefined;
+  // First, prepare the initial data for the form by handling tags properly
+  const prepareFormData = () => {
+    if (!initialData) {
+      return {
+        title: "",
+        description: "",
+        provider: "",
+        image_url: "",
+        level: "Beginner" as const,
+        category: "",
+        duration: "",
+        price: 0,
+        rating: 0,
+        reviews: 0,
+        featured: false,
+        tags: "",
+      };
+    }
+
+    // Convert tags array to string for the form
+    const tagsString = Array.isArray(initialData.tags) 
+      ? initialData.tags.join(", ") 
+      : "";
+    
+    return {
+      ...initialData,
+      tags: tagsString
+    };
+  };
 
   // Initialize the form with zod resolver
   const form = useForm<CourseFormValues>({
     resolver: zodResolver(courseFormSchema),
-    defaultValues: formattedData || {
-      title: "",
-      description: "",
-      provider: "",
-      image_url: "",
-      level: "Beginner",
-      category: "",
-      duration: "",
-      price: 0,
-      rating: 0,
-      reviews: 0,
-      featured: false,
-      tags: "",
-    },
+    defaultValues: prepareFormData(),
   });
 
   const onSubmit = async (data: CourseFormValues) => {
