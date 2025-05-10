@@ -69,7 +69,7 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
         rating: 0,
         reviews: 0,
         featured: false,
-        tags: "",
+        tags: "", // This will be transformed to string[] by zod schema
       };
     }
 
@@ -80,7 +80,7 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
     
     return {
       ...initialData,
-      tags: tagsString
+      tags: tagsString // This will be transformed to string[] by zod schema
     };
   };
 
@@ -106,7 +106,8 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
         rating: Number(data.rating || 0),
         reviews: Number(data.reviews || 0),
         featured: Boolean(data.featured),
-        tags: Array.isArray(data.tags) ? data.tags : [],
+        // Ensure tags is treated as an array
+        tags: Array.isArray(data.tags) ? data.tags : (data.tags ? data.tags.split(',').map(tag => tag.trim()) : []),
       };
 
       if (isEditing && initialData?.id) {
