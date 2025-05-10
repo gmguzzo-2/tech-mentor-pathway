@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -56,8 +55,7 @@ const CourseForm = ({ initialData, isEditing = false }: CourseFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Process tags properly for the form
-  // First, prepare the initial data for the form by handling tags properly
-  const prepareFormData = () => {
+  const prepareFormData = (): CourseFormValues => {
     if (!initialData) {
       return {
         title: "",
